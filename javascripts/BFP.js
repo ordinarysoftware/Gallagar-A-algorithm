@@ -44,7 +44,7 @@ var BFP = (function () {
      for (let iteration = 0; iteration < maxIterations; iteration++) {
       const updatedSymbolValues = [...symbolNodeValues];
       updatecheckNodeValues=[];
-    
+      
       // Iterate over each check node
       for (let checkNode = 0; checkNode < checkNodeNumber; checkNode++) {
           // Find symbol nodes connected to the current check node
@@ -73,8 +73,10 @@ var BFP = (function () {
 
 
           updatecheckNodeValues.push(sumMod2);
+          
          
       }
+      
       for (let symbolNode = 0; symbolNode < symbolNodeNumber; symbolNode++) {
         const connectedCheckNodes = [];
         for (let checkNode = 0; checkNode < checkNodeNumber; checkNode++) {
@@ -84,6 +86,7 @@ var BFP = (function () {
       }
       console.log(connectedCheckNodes);
       const sumMod3=areValuesEqualAtIndexes(updatecheckNodeValues,connectedCheckNodes);
+      
       if(sumMod3===true){
         symbolNodeValues[symbolNode]=updatedSymbolValues[connectedCheckNodes[0]]
 
@@ -98,8 +101,13 @@ var BFP = (function () {
       
       tannerGraph = new TannerGraph(parityCheckMatrix);
       hook && hook(tannerGraph);
+     
       checkNodeValue=updatecheckNodeValues;
-      
+      var stopiteration=allZeros(checkNodeValue);
+      if(stopiteration===true){
+        maxIterations=iteration+2;
+        
+      } 
       
       console.log(`Iteratio:`);
     console.log("Check Node Values:", checkNodeValue);
@@ -136,24 +144,9 @@ function areValuesEqualAtIndexes(array, indexes) {
   const valuesToCheck = indexes.map(index => array[index]);
   return valuesToCheck.every((value, index, arr) => value === arr[0]);
 }
-// for(let chi=0;chi<connectedSymbolNodes.length;chi++){
-//   var edgescheck=connectedSymbolNodes[chi];            
-//   updatedSymbolValues[edgescheck]=sumMod2;
-  
-  
-// }
-// for(let hi=0;hi<symbolNodeValues.length;hi++){
-//   var sample1=symbolNodeValues[hi];
-//   console.log(hi,updatedSymbolValues[hi]);
-  
-//   var sample2=updatedSymbolValues[hi];
-//   var sample3;
-//   if(sample1===sample2){
-//     console.log("same:",sample1,sample2);
-//     symbolNodeValues[hi]=sample2;
-//   }
-//   else{
-//     symbolNodeValues[hi]=sample1;
-//     console.log("not same:", sample1,sample2);
-//   }
-// }
+function allZeros(array) {
+  // Using the every() method to check if all elements are zero
+  return array.every(function(element) {
+      return element === 0;
+  });
+}
