@@ -25,13 +25,13 @@ document.addEventListener('DOMContentLoaded', function(){
     var checkNodeValue=[];
     
     
-    BFP.hook(function(intermediateGraph){
+    GLA.hook(function(intermediateGraph){
       graphProgress.push(intermediateGraph.getClone());
     });
 
     graphProgress = [];
     graphProgressIndex = 0;
-    var tannerGraph = BFP.create({
+    var tannerGraph = GLA.create({
       checkNodeValue: checkNodeValue,
       symbolNodeValues: symbolNodeValues
            
