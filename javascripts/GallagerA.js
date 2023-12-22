@@ -1,4 +1,4 @@
-var BFP = (function () {
+var GLA = (function () {
   
 
   var checkNodeNumber = 5;
